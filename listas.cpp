@@ -96,6 +96,8 @@ void menu(int opcion){
 void agregar(Tlista &lista){
 int ndato;
 Tlista p;
+Tlista q;
+Tlista t;
 do{
 system("cls");
 cout<<" Ingrese el numero para la lista, '0' para salir ";
@@ -104,12 +106,35 @@ if(ndato==0){
 	cout<<" No se agregan mas elementos a la lista..\n "<<endl;;
 }
 else{
-	p= new nodo();
-	p->dato=ndato;
-	p->sgt=lista;
-	lista=p;
-	cout<<" elemento agregado correctamente"<<endl;;
-	system("pause");
+		p= new nodo();	
+		p->dato=ndato;
+		p->sgt=lista;
+		
+	if(lista==NULL){	
+		
+		lista=p;
+		cout<<" elemento agregado correctamente"<<endl;;
+		system("pause");		
+	}
+	else
+	{
+		q=lista;
+		
+		while((q!=NULL)&&(p->dato <= q->dato)){
+			t=q;
+			q=q->sgt;				
+		}
+		if(lista==q){
+			p->sgt=q;
+			lista=p;
+		}	
+		else{
+			t->sgt=p;
+		}
+		p->sgt=q;
+	
+	}
+	
 }
 
 }while(ndato!=0);
@@ -118,7 +143,7 @@ else{
 
 void mostrar(Tlista &lista){
 	
-cout<<" Imprimir lista ";
+cout<<" Imprimir lista "<<endl;
 nodo *lis_aux;
 lis_aux=lista;
 int i=0;
